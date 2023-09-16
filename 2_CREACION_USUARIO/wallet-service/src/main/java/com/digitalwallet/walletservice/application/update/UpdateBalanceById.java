@@ -17,8 +17,8 @@ public class UpdateBalanceById {
         Balance balanceUpdate = new Balance(updateBalance.balance());
         Wallet walletFound = walletRepository.findById(walletId);
         Wallet updateWallet = new Wallet(walletId, balanceUpdate.value()
-                , walletFound.getCurrency()
-                , walletFound.getCustomer());
+                , walletFound.currency()
+                , walletFound.customer());
         walletRepository.update(updateWallet);
     }
 }

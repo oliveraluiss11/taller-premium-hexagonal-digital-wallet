@@ -12,12 +12,11 @@ import org.springframework.stereotype.Component;
 public class WalletRepositoryImpl implements WalletRepository {
     private final WalletMongoRepository walletMongoRepository;
     private final WalletPersistenceMapper walletPersistenceMapper;
-
     @Override
     public Wallet save(Wallet wallet) {
         if (walletMongoRepository
-                .existsByCustomerDocumentNumberOrCustomerPhoneNumber(wallet.getCustomer().getDocumentNumber()
-                        , wallet.getCustomer().getPhoneNumber()))
+                .existsByCustomerDocumentNumberOrCustomerPhoneNumber(wallet.customer().documentNumber()
+                        , wallet.customer().phoneNumber()))
             throw new WalletGenericClientException("Wallet already exist", HttpStatus.CONFLICT);
         WalletDocument walletDocumentCreated = walletMongoRepository.save(
                 walletPersistenceMapper.toDocument(wallet)
