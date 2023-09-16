@@ -13,6 +13,9 @@ public class WalletPersistenceMapper {
     }
 
     public WalletDocument toDocument(Wallet wallet) {
-        return new WalletDocument(wallet.walletId() ,wallet.balance(), wallet.currency(), wallet.customer());
+        return new WalletDocument(wallet.getWalletId()
+                , wallet.getBalance()
+                , wallet.getCurrency()
+                , wallet.getCustomer());
     }
 }
