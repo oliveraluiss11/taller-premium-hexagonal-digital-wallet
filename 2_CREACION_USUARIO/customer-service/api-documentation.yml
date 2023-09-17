@@ -63,9 +63,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DigitalWalletGenericException'
+              example:
+                status: 'BAD_REQUEST'
+                message: 'Field is invalid'
+                timestamp: '2023-09-17T11:34:59.2406603'
         '409':
           description: CONFLICT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DigitalWalletGenericException'
+              example:
+                status: 'CONFLICT'
+                message: 'Customer already exists'
+                timestamp: '2023-09-17T11:34:59.2406603'
