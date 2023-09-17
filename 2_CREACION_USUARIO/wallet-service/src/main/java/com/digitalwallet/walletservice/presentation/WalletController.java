@@ -5,6 +5,7 @@ import com.digitalwallet.walletservice.application.create.WalletCreationRequest;
 import com.digitalwallet.walletservice.application.find.FindWallet;
 import com.digitalwallet.walletservice.application.update.UpdateBalance;
 import com.digitalwallet.walletservice.application.update.UpdateBalanceById;
+import com.digitalwallet.walletservice.domain.Wallet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,18 +26,18 @@ public class WalletController {
     private final FindWallet findWallet;
     private final UpdateBalanceById updateBalanceById;
     @PostMapping
-    public ResponseEntity create(@RequestBody WalletCreationRequest request) {
+    public ResponseEntity<Void> create(@RequestBody WalletCreationRequest request) {
         createWallet.create(request);
         return new ResponseEntity( HttpStatus.CREATED);
     }
 
     @GetMapping
-    ResponseEntity findByPhoneNumber(@RequestParam String phoneNumber){
+    ResponseEntity<Wallet> findByPhoneNumber(@RequestParam String phoneNumber){
         return ResponseEntity.ok(findWallet.findByPhoneNumber(phoneNumber));
     }
 
     @PatchMapping("/{walletId}/balance")
-    ResponseEntity updateBalance(@PathVariable String walletId, @RequestBody UpdateBalance updateBalance){
+    ResponseEntity<Void> updateBalance(@PathVariable String walletId, @RequestBody UpdateBalance updateBalance){
         updateBalanceById.updateBalance(walletId, updateBalance);
         return ResponseEntity.accepted().build();
     }

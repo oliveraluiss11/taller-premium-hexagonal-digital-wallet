@@ -1,0 +1,45 @@
+openapi: 3.0.2
+info:
+  title: User Microservice
+  version: '1.0'
+servers:
+  - url: https://localhost:9000
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        documentNumber:
+          type: string
+        phoneNumber:
+          type: string
+        givenNames:
+          type: string
+        surnames:
+          type: string
+        email:
+          type: string
+        documentType:
+          type: string
+paths:
+  /customers:
+    post:
+      tags:
+        - Customer
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example:
+              documentNumber: '20345682'
+              documentType: DNI
+              phoneNumber: '901236372'
+              givenNames: Oriana Cristina
+              surnames: Serrano Peña
+              email: orianaserranop@gmail.com
+      responses:
+        '201':
+          description: CREATED
