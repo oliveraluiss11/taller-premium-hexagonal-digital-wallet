@@ -3,7 +3,7 @@ info:
   title: User Microservice
   version: '1.0'
 servers:
-  - url: https://localhost:9000
+  - url: http://localhost:9000
 components:
   schemas:
     Customer:
@@ -21,6 +21,20 @@ components:
           type: string
         documentType:
           type: string
+
+    DigitalWalletGenericException:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "STATUS"
+        message:
+          type: string
+          example: "MESSAGE"
+        timestamp:
+          type: string 
+          example: "2023-09-17T11:34:59.2406603"
+        
 paths:
   /customers:
     post:
@@ -43,3 +57,15 @@ paths:
       responses:
         '201':
           description: CREATED
+        '400':
+          description: BAD_REQUEST,
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWalletGenericException'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWalletGenericException'

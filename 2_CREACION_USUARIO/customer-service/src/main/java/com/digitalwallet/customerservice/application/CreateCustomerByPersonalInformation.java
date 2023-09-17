@@ -12,12 +12,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CreateCustomerByPersonalInformation {
     private final CustomerRepository customerRepository;
-    public void register(CustomerCreation customerCreation){
 
+    public void register(CustomerCreation customerCreation) {
+        String documentNumber = customerCreation.getDocumentNumber().replace("+","");
+        Customer customer = new Customer(documentNumber
+                , customerCreation.getPhoneNumber(), customerCreation.getDocumentType()
+                , customerCreation.getEmail(), customerCreation.getGivenNames()
+                , customerCreation.getSurnames());
         if (customerRepository
-                .findByDocumentNumberOrPhoneNumber(customerCreation.getDocumentNumber()
+                .findByDocumentNumberOrPhoneNumber(documentNumber
                         , customerCreation.getPhoneNumber()).isPresent())
             throw new DigitalWalletGenericClientException("Customer already exists"
                     , HttpStatus.CONFLICT);
+        customerRepository.register(customer);
     }
 }
