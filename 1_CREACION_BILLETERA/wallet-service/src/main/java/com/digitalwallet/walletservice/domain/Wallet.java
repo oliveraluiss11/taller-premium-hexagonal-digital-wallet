@@ -27,7 +27,7 @@ public class Wallet {
                 , customer.getGivenNames(), customer.getSurnames());
     }
     public String getWalletId() {
-        return this.getWalletId();
+        return this.walletId;
     }
 
     public BigDecimal getBalance() {
@@ -39,7 +39,7 @@ public class Wallet {
     }
 
     public Customer getCustomer() {
-        return this.getCustomer();
+        return this.customer;
     }
 
 }
