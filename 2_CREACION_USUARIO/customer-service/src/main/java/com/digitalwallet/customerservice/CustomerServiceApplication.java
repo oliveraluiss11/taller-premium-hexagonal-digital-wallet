@@ -5,8 +5,12 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
-@EnableFeignClients("com.digitalwallet.customerservice.infrastructure")
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableMongoRepositories(basePackages = "com.digitalwallet.customerservice.infrastructure")
+@EnableTransactionManagement
+@EnableFeignClients("com.digitalwallet.customerservice.infrastructure")
 @ImportAutoConfiguration({FeignAutoConfiguration.class})
 @SpringBootApplication
 public class CustomerServiceApplication {
