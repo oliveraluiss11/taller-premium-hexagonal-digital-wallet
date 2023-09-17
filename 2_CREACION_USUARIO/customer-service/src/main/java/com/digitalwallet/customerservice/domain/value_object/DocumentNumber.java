@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 public record DocumentNumber(String value) {
@@ -11,6 +11,6 @@ public record DocumentNumber(String value) {
 
     private void ensureDocumentNumber(String value) {
         if (!value.matches("^[0-9]{8}$"))
-            throw new WalletGenericClientException("Document number is invalid", HttpStatus.BAD_REQUEST);
+            throw new DigitalWalletGenericClientException("Document number is invalid", HttpStatus.BAD_REQUEST);
     }
 }

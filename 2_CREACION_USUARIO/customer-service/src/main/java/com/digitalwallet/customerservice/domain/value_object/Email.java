@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 public record Email(String value) {
@@ -10,7 +10,7 @@ public record Email(String value) {
     }
     private void ensureIsValidEmail(String value) {
         if (!value.matches("[a-zA-Z0-9._%+-]+@(?:hotmail\\.com|gmail\\.com|outlook\\.com)"))
-            throw new WalletGenericClientException("Email is invalid"
+            throw new DigitalWalletGenericClientException("Email is invalid"
                     , HttpStatus.BAD_REQUEST);
     }
 }

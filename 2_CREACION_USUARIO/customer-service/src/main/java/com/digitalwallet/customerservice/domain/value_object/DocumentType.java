@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ public record DocumentType(String value) {
     private void ensureIsValidTypeDocument(String value){
         List<String> typeDocumentList = Arrays.asList("DNI");
         if (!typeDocumentList.contains(value)){
-            throw new WalletGenericClientException("Document type is invalid"
+            throw new DigitalWalletGenericClientException("Document type is invalid"
                     , HttpStatus.BAD_REQUEST);
         }
     }

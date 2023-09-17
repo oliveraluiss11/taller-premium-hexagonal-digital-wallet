@@ -3,12 +3,12 @@ package com.digitalwallet.customerservice.infrastructure;
 import com.digitalwallet.customerservice.domain.Customer;
 import com.digitalwallet.customerservice.domain.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-@Service
+@Repository
 @RequiredArgsConstructor
 public class CustomerRepositoryImpl implements CustomerRepository {
 

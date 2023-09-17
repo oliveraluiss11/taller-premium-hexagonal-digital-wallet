@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ public record Balance(BigDecimal value) {
     }
     private void ensureIsBalancePositiveValue(BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) < 0)
-            throw new WalletGenericClientException("The balance must be greater than zero"
+            throw new DigitalWalletGenericClientException("The balance must be greater than zero"
                     , HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
@@ -15,6 +15,6 @@ public record Currency(String value) {
     private void ensureIsValidCurrency(String currency) {
         List<String> currencyList = Arrays.asList("PEN", "USD");
         if (!currencyList.contains(currency))
-            throw new WalletGenericClientException("Currency is invalid", HttpStatus.BAD_REQUEST);
+            throw new DigitalWalletGenericClientException("Currency is invalid", HttpStatus.BAD_REQUEST);
     }
 }

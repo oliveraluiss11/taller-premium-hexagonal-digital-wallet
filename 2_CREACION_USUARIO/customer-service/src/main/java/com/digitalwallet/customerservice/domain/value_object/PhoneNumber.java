@@ -1,6 +1,6 @@
 package com.digitalwallet.customerservice.domain.value_object;
 
-import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientException;
+import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 public record PhoneNumber(String value) {
@@ -10,7 +10,7 @@ public record PhoneNumber(String value) {
     }
     private void ensureIsValidPhoneNumber(String value) {
         if (!value.matches("^?519\\d{8}$"))
-            throw new WalletGenericClientException("Phone number is invalid"
+            throw new DigitalWalletGenericClientException("Phone number is invalid"
                     , HttpStatus.BAD_REQUEST);
     }
 }
