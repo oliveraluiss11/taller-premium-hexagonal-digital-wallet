@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,13 @@ public class WalletGlobalExceptionHandler {
         String message = ex.getMessage();
         String code = ex.getCode();
         WalletError walletError = new WalletError(status, message, code);
+        return new ResponseEntity<>(walletError, walletError.getStatus());
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<WalletError> handleIOExceptionError(IOException exception){
+        String message = exception.getMessage();
+        WalletError walletError = new WalletError(HttpStatus.INTERNAL_SERVER_ERROR, message, null);
         return new ResponseEntity<>(walletError, walletError.getStatus());
     }
 }
