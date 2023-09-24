@@ -50,7 +50,7 @@ paths:
             example:
               documentNumber: '20345682'
               documentType: DNI
-              phoneNumber: '901236372'
+              phoneNumber: '51901236372'
               givenNames: Oriana Cristina
               surnames: Serrano Peña
               email: orianaserranop@gmail.com
