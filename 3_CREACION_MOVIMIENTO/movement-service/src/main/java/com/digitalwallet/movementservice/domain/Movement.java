@@ -34,6 +34,21 @@ public class Movement{
         this.walletId = new UUID(walletId);
         this.registrationDate = registrationDate;
     }
+    public Movement(String operationNumber,
+                    String transferId,
+                    String typeTransaction,
+                    String currency,
+                    BigDecimal amount,
+                    String walletId,
+                    LocalDateTime registrationDate){
+        this.operationNumber = new UUID(operationNumber);
+        this.transferId = new UUID(transferId);
+        this.typeTransaction = new TypeTransaction(typeTransaction);
+        this.currency = new Currency(currency);
+        this.amount = new Money(amount);
+        this.walletId = new UUID(walletId);
+        this.registrationDate = registrationDate;
+    }
     public String movementId(){
         return this.movementId.value();
     }

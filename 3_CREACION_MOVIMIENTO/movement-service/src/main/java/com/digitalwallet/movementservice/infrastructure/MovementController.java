@@ -1,7 +1,9 @@
 package com.digitalwallet.movementservice.infrastructure;
 
+import com.digitalwallet.movementservice.application.RegisteredMovement;
 import com.digitalwallet.movementservice.domain.MovementCreation;
 import com.digitalwallet.movementservice.domain.MovementResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +12,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movements")
+@RequiredArgsConstructor
 public class MovementController {
+    private final RegisteredMovement registeredMovement;
     @PostMapping
     public ResponseEntity<Void> createMovement(@RequestBody MovementCreation movement) {
-        // Aquí implementarías la lógica para crear un nuevo movimiento en tu aplicación
-        // Después de crear el movimiento, puedes devolver una respuesta con código 201 Created
-        // y la ubicación del nuevo recurso en los encabezados de respuesta.
-
-
+        this.registeredMovement.registered(movement);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
