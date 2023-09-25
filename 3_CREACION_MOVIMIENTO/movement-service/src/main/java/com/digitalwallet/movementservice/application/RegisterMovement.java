@@ -13,7 +13,7 @@ import java.time.ZoneId;
 
 @Service
 @RequiredArgsConstructor
-public class RegisteredMovement {
+public class RegisterMovement {
     private final MovementRepository movementRepository;
 
     public void registered(MovementCreation movementCreation) {

@@ -1,6 +1,7 @@
 package com.digitalwallet.movementservice.infrastructure;
 
-import com.digitalwallet.movementservice.application.RegisteredMovement;
+import com.digitalwallet.movementservice.application.FindMovementByWalletId;
+import com.digitalwallet.movementservice.application.RegisterMovement;
 import com.digitalwallet.movementservice.domain.MovementCreation;
 import com.digitalwallet.movementservice.domain.MovementResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +15,16 @@ import java.util.List;
 @RequestMapping("/movements")
 @RequiredArgsConstructor
 public class MovementController {
-    private final RegisteredMovement registeredMovement;
+    private final RegisterMovement registerMovement;
+    private final FindMovementByWalletId findMovementByWalletId;
     @PostMapping
     public ResponseEntity<Void> createMovement(@RequestBody MovementCreation movement) {
-        this.registeredMovement.registered(movement);
+        this.registerMovement.registered(movement);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<MovementResponse>> getMovementsByWalletId(@RequestParam String walletId) {
-        return ResponseEntity.ok(List.of());
+        return ResponseEntity.ok(findMovementByWalletId.findMovements(walletId));
     }
 }

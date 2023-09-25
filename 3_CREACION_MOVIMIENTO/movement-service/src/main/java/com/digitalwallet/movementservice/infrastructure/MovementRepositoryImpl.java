@@ -5,6 +5,8 @@ import com.digitalwallet.movementservice.domain.MovementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class MovementRepositoryImpl implements MovementRepository {
@@ -20,5 +22,12 @@ public class MovementRepositoryImpl implements MovementRepository {
     @Override
     public Boolean existsByOperationNumber(String operationNumber) {
         return repository.existsByOperationNumber(operationNumber);
+    }
+
+    @Override
+    public List<Movement> findByWalletId(String walletId) {
+        return repository
+                .findByWalletIdOrderByRegistrationDateDesc(walletId)
+                .stream().map(movementMapper::toDomain).toList();
     }
 }
