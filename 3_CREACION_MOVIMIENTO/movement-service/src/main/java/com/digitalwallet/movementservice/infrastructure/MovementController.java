@@ -21,12 +21,8 @@ public class MovementController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // Endpoint para obtener movimientos por walletId
     @GetMapping
     public ResponseEntity<List<MovementResponse>> getMovementsByWalletId(@RequestParam String walletId) {
-        // Aquí implementarías la lógica para obtener movimientos por walletId
-        // Debes llenar la lista "movements" con los resultados
-        // Retorna los movimientos encontrados en una respuesta exitosa (200 OK)
         return ResponseEntity.ok(List.of());
     }
 }

@@ -8,7 +8,7 @@ import com.digitalwallet.movementservice.domain.value_objects.UUID;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Movement{
+public class Movement {
     private UUID movementId;
     private UUID operationNumber;
     private UUID transferId;
@@ -17,6 +17,7 @@ public class Movement{
     private Money amount;
     private UUID walletId;
     private LocalDateTime registrationDate;
+
     public Movement(String movementId,
                     String operationNumber,
                     String transferId,
@@ -24,7 +25,7 @@ public class Movement{
                     String currency,
                     BigDecimal amount,
                     String walletId,
-                    LocalDateTime registrationDate){
+                    LocalDateTime registrationDate) {
         this.movementId = new UUID(movementId);
         this.operationNumber = new UUID(operationNumber);
         this.transferId = new UUID(transferId);
@@ -34,13 +35,14 @@ public class Movement{
         this.walletId = new UUID(walletId);
         this.registrationDate = registrationDate;
     }
+
     public Movement(String operationNumber,
                     String transferId,
                     String typeTransaction,
                     String currency,
                     BigDecimal amount,
                     String walletId,
-                    LocalDateTime registrationDate){
+                    LocalDateTime registrationDate) {
         this.operationNumber = new UUID(operationNumber);
         this.transferId = new UUID(transferId);
         this.typeTransaction = new TypeTransaction(typeTransaction);
@@ -49,8 +51,9 @@ public class Movement{
         this.walletId = new UUID(walletId);
         this.registrationDate = registrationDate;
     }
-    public String movementId(){
-        return this.movementId.value();
+
+    public String getMovementId() {
+        return this.movementId != null ? this.movementId.value() : null;
     }
 
     public String getOperationNumber() {
