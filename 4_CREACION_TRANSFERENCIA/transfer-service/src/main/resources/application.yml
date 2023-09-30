@@ -1,0 +1,16 @@
+server:
+  port: 9002
+spring:
+  datasource:
+    url: jdbc:postgresql://containers-us-west-93.railway.app:6765/railway
+    username: postgres
+    password: Mcl5OlKbTtlUFmbiicKg
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: false
+    locations: classpath:db-migration
