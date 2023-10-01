@@ -1,5 +1,6 @@
 package com.digitalwallet.transferservice.transfer.domain.exceptions;
 
+import com.digitalwallet.transferservice.transfer.domain.DigitalWalletGenericServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,16 @@ public class DigitalWalletGlobalExceptionHandler {
         }
         return new ResponseEntity<>(digitalWalletError, digitalWalletError.getStatus());
     }
-
+    @ExceptionHandler(DigitalWalletGenericServerException.class)
+    public ResponseEntity<DigitalWalletError> handleServerGenericError(DigitalWalletGenericServerException ex) {
+        HttpStatus status = ex.getHttpStatus();
+        String message = ex.getMessage();
+        DigitalWalletError digitalWalletError = new DigitalWalletError(status, message);
+        if (ex.getCode() != null || !"".equals(ex.getCode())) {
+            digitalWalletError = new DigitalWalletError(status, message, ex.getCode());
+        }
+        return new ResponseEntity<>(digitalWalletError, digitalWalletError.getStatus());
+    }
     @ExceptionHandler({Exception.class})
     public ResponseEntity<DigitalWalletError> handleAll(Exception ex, WebRequest request) {
         DigitalWalletError error = new DigitalWalletError(

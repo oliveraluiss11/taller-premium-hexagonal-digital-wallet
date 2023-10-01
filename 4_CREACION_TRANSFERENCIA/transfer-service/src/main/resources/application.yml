@@ -2,9 +2,9 @@ server:
   port: 9002
 spring:
   datasource:
-    url: jdbc:postgresql://containers-us-west-93.railway.app:6765/railway
+    url: jdbc:postgresql://containers-us-west-167.railway.app:7088/railway
     username: postgres
-    password: Mcl5OlKbTtlUFmbiicKg
+    password: lFnWpLlsrYHeH2ofmqUl
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
