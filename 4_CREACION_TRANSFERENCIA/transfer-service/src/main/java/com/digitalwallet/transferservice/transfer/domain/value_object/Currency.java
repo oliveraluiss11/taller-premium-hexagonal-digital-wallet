@@ -1,6 +1,6 @@
 package com.digitalwallet.transferservice.transfer.domain.value_object;
 
-import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
+import com.digitalwallet.transferservice.transfer.domain.exceptions.DigitalWalletGenericClientException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;

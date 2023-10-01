@@ -31,7 +31,6 @@ public class Transfer {
         this.amount = new Balance(amount);
         this.currency = new Currency(currency);
         this.registrationDate = registrationDate;
-        this.transferId = transferId;
         this.originWalletId = originWalletId;
         this.destinationWalletId = destinationWalletId;
     }

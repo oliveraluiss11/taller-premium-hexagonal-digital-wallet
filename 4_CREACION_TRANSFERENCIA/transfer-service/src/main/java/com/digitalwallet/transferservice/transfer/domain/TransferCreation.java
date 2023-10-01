@@ -3,13 +3,9 @@ package com.digitalwallet.transferservice.transfer.domain;
 import com.digitalwallet.transferservice.transfer.domain.value_object.Balance;
 import com.digitalwallet.transferservice.transfer.domain.value_object.Currency;
 import com.digitalwallet.transferservice.transfer.domain.value_object.PhoneNumber;
-import lombok.Builder;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Getter
-@Builder
 public class TransferCreation {
     private PhoneNumber originPhoneNumber;
     private PhoneNumber destinationPhoneNumber;
