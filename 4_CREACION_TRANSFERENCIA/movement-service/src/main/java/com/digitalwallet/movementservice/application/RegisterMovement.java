@@ -17,7 +17,9 @@ public class RegisterMovement {
     private final MovementRepository movementRepository;
 
     public void registered(MovementCreation movementCreation) {
-        if(movementRepository.existsByOperationNumber(movementCreation.getOperationNumber()))
+        Long countMovementByOperationNumberExists = movementRepository
+                .countByOperationNumber(movementCreation.getOperationNumber());
+        if (countMovementByOperationNumberExists >= 2)
             throw new DigitalWalletGenericClientException("Movement already exists", HttpStatus.CONFLICT);
         LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("America/Lima"));
         Movement movement = new Movement(

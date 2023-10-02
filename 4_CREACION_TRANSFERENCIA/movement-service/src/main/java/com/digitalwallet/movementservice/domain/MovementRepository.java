@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface MovementRepository {
     Movement save(Movement movement);
-    Boolean existsByOperationNumber(String operationNumber);
+    Long countByOperationNumber(String operationNumber);
     List<Movement> findByWalletId(String walletId);
 }
