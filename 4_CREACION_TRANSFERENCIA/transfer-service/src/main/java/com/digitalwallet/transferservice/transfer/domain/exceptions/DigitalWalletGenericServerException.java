@@ -1,4 +1,4 @@
-package com.digitalwallet.transferservice.transfer.domain;
+package com.digitalwallet.transferservice.transfer.domain.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

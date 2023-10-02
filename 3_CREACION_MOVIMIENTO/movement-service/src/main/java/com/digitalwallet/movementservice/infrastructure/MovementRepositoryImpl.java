@@ -20,8 +20,8 @@ public class MovementRepositoryImpl implements MovementRepository {
     }
 
     @Override
-    public Boolean existsByOperationNumber(String operationNumber) {
-        return repository.existsByOperationNumber(operationNumber);
+    public Long countByOperationNumber(String operationNumber) {
+        return repository.countByOperationNumber(operationNumber);
     }
 
     @Override

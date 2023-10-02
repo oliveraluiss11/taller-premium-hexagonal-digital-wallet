@@ -19,7 +19,14 @@ public class TransferCreation {
         this.destinationPhoneNumber = new PhoneNumber(destinationPhoneNumber);
         this.currency = new Currency(currency);
     }
-
+    public static TransferCreation fromTransferRequest(TransferRequest transferRequest) {
+        return new TransferCreation(
+                transferRequest.getOriginPhoneNumber(),
+                transferRequest.getDestinationPhoneNumber(),
+                transferRequest.getAmount(),
+                transferRequest.getCurrency()
+        );
+    }
     public String getOriginPhoneNumber() {
         return originPhoneNumber.value();
     }

@@ -1,6 +1,6 @@
 package com.digitalwallet.transferservice.wallet.infrastructure;
 
-import com.digitalwallet.transferservice.transfer.domain.DigitalWalletGenericServerException;
+import com.digitalwallet.transferservice.transfer.domain.exceptions.DigitalWalletGenericServerException;
 import com.digitalwallet.transferservice.wallet.domain.UpdateBalanceAPI;
 import com.digitalwallet.transferservice.wallet.domain.WalletAPI;
 import com.digitalwallet.transferservice.wallet.domain.WalletExternalAPI;

@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface MovementMongoRepository extends MongoRepository<MovementDocument, String> {
-    Boolean existsByOperationNumber(String operationNumber);
+    Long countByOperationNumber(String operationNumber);
     List<MovementDocument> findByWalletIdOrderByRegistrationDateDesc(String walletId);
 }

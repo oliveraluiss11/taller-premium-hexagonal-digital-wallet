@@ -2,7 +2,7 @@ package com.digitalwallet.transferservice.movement.infrastructure;
 
 import com.digitalwallet.transferservice.movement.domain.MovementCreationAPI;
 import com.digitalwallet.transferservice.movement.domain.MovementExternalAPI;
-import com.digitalwallet.transferservice.transfer.domain.DigitalWalletGenericServerException;
+import com.digitalwallet.transferservice.transfer.domain.exceptions.DigitalWalletGenericServerException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;

@@ -15,7 +15,7 @@ public record Money(BigDecimal value) {
         }
         String valueStr = value.toString();
         // Utilizamos una expresión regular para verificar que el valor tenga dos decimales
-        if (!Pattern.matches("^\\d+\\.\\d{2}$", valueStr)) {
+        if (!Pattern.matches("^-?\\d+\\.\\d{2}$", valueStr)) {
             throw new IllegalArgumentException("El valor debe ser un número con dos decimales");
         }
     }
