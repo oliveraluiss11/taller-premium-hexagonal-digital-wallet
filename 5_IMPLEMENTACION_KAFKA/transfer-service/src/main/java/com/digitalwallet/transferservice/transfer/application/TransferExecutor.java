@@ -1,13 +1,14 @@
 package com.digitalwallet.transferservice.transfer.application;
 
 import com.digitalwallet.transferservice.movement.domain.MovementCreationAPI;
-import com.digitalwallet.transferservice.movement.domain.MovementExternalAPI;
+import com.digitalwallet.transferservice.movement.domain.MovementEventProducer;
 import com.digitalwallet.transferservice.transfer.domain.Transfer;
 import com.digitalwallet.transferservice.transfer.domain.TransferCreation;
 import com.digitalwallet.transferservice.transfer.domain.TransferRepository;
 import com.digitalwallet.transferservice.transfer.domain.TransferRequest;
 import com.digitalwallet.transferservice.wallet.domain.UpdateBalanceAPI;
 import com.digitalwallet.transferservice.wallet.domain.WalletAPI;
+import com.digitalwallet.transferservice.wallet.domain.WalletEventProducer;
 import com.digitalwallet.transferservice.wallet.domain.WalletExternalAPI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,9 @@ public class TransferExecutor {
 
     private final WalletExternalAPI walletExternalAPI;
     private final TransferValidator transferValidator;
-    private final MovementExternalAPI movementExternalAPI;
     private final TransferRepository transferRepository;
+    private final MovementEventProducer movementEventProducer;
+    private final WalletEventProducer walletEventProducer;
 
     /**
      * Realiza una transferencia entre dos billeteras.
@@ -72,17 +74,20 @@ public class TransferExecutor {
     }
 
     private void registerMovementForWallet(Transfer transfer, WalletAPI wallet, BigDecimal amount, String currency, UUID uuid) {
-        movementExternalAPI.registerMovement(MovementCreationAPI.builder()
+        MovementCreationAPI movementCreationAPI = MovementCreationAPI.builder()
                 .transferId(transfer.getTransferId().toString())
                 .amount(amount)
                 .currency(currency)
                 .typeTransaction("TRANSFER")
                 .operationNumber(uuid.toString())
                 .walletId(wallet.getWalletId())
-                .build());
+                .build();
+        movementEventProducer.sendRegisterMovementEvent(movementCreationAPI);
     }
 
     private void updateBalanceForWallet(BigDecimal balance, WalletAPI walletAPI) {
-        walletExternalAPI.updateBalanceById(walletAPI.getWalletId(), UpdateBalanceAPI.builder().balance(balance).build());
+        walletEventProducer.sendUpdateBalanceEvent(UpdateBalanceAPI.builder()
+                .walletId(walletAPI.getWalletId())
+                .balance(balance).build());
     }
 }

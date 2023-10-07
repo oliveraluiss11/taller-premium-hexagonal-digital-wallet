@@ -1,4 +1,4 @@
-package com.digitalwallet.walletservice.config;
+package com.digitalwallet.movementservice.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -13,13 +13,12 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
 import java.util.HashMap;
 import java.util.Map;
-
 @Configuration
 public class KafkaConsumerConfig {
     @Value("${spring.kafka.bootstrap-server}")
     private String bootstrapServer;
 
-    public Map<String, Object> consumerConfig() {
+    public Map<String, Object> consumerConfig(){
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -29,12 +28,12 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory(){
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> factory() {
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> factory(){
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;

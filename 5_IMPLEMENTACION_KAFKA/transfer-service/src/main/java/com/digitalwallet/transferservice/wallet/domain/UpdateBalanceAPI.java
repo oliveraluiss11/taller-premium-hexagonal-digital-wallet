@@ -12,5 +12,6 @@ import java.math.BigDecimal;
 @Getter
 @Builder
 public class UpdateBalanceAPI {
+    private String walletId;
     private BigDecimal balance;
 }

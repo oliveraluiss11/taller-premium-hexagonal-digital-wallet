@@ -15,13 +15,7 @@ import java.util.List;
 @RequestMapping("/movements")
 @RequiredArgsConstructor
 public class MovementController {
-    private final RegisterMovement registerMovement;
     private final FindMovementByWalletId findMovementByWalletId;
-    @PostMapping
-    public ResponseEntity<Void> createMovement(@RequestBody MovementCreation movement) {
-        this.registerMovement.registered(movement);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 
     @GetMapping
     public ResponseEntity<List<MovementResponse>> getMovementsByWalletId(@RequestParam String walletId) {
