@@ -18,24 +18,11 @@ import java.util.function.Function;
 public class CustomerRepositoryImpl implements CustomerRepository {
 
     private final CustomerMongoRepository mongoRepository;
-    private final WalletAPIRepository walletAPIRepository;
     private final PersistenceMapper persistenceMapper;
 
     @Override
     public Customer register(Customer customer) {
         CustomerDocument customerDocument = mongoRepository.save(persistenceMapper.toDocument(customer));
-        ResponseEntity response = walletAPIRepository.createWallet(new WalletCreation("PEN", customer));
-        if (response.getStatusCode().is4xxClientError()){
-            ResponseEntity<DigitalWalletError> responseError = (ResponseEntity<DigitalWalletError>) response.getBody();
-            throw new DigitalWalletGenericClientException(responseError.getBody().getMessage()
-                    , HttpStatus.valueOf(responseError.getStatusCode().value()));
-        }
-        if (response.getStatusCode().is5xxServerError()){
-            ResponseEntity<DigitalWalletError> responseError = (ResponseEntity<DigitalWalletError>) response.getBody();
-            throw new DigitalWalletGenericClientException(responseError.getBody().getMessage()
-                    , HttpStatus.valueOf(responseError.getStatusCode().value()));
-        }
-
         return persistenceMapper.toDomain(customerDocument);
     }
 
@@ -48,10 +35,4 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Optional<Customer> customerOptional = customerDocumentFoundOptional.map(customerDocumentToCustomer);
         return customerOptional;
     }
-
-    /* TODO: Eliminar método - Ambos métodos son equivalentes POO equivalente a Programacion Funcional
-    Function<CustomerDocument, Customer> customerDocumentToCustomer = persistenceMapper::toDomain;
-    private Customer DocumentToCustomer(CustomerDocument document) {
-        return persistenceMapper.toDomain(document);
-    }*/
 }
