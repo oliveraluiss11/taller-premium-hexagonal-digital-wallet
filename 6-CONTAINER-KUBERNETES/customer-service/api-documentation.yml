@@ -1,0 +1,79 @@
+openapi: 3.0.2
+info:
+  title: User Microservice
+  version: '1.0'
+servers:
+  - url: http://localhost:9000
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        documentNumber:
+          type: string
+        phoneNumber:
+          type: string
+        givenNames:
+          type: string
+        surnames:
+          type: string
+        email:
+          type: string
+        documentType:
+          type: string
+
+    DigitalWalletGenericException:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "STATUS"
+        message:
+          type: string
+          example: "MESSAGE"
+        timestamp:
+          type: string 
+          example: "2023-09-17T11:34:59.2406603"
+        
+paths:
+  /customers:
+    post:
+      tags:
+        - Customer
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example:
+              documentNumber: '20345682'
+              documentType: DNI
+              phoneNumber: '51901236372'
+              givenNames: Oriana Cristina
+              surnames: Serrano Peña
+              email: orianaserranop@gmail.com
+      responses:
+        '201':
+          description: CREATED
+        '400':
+          description: BAD_REQUEST,
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWalletGenericException'
+              example:
+                status: 'BAD_REQUEST'
+                message: 'Field is invalid'
+                timestamp: '2023-09-17T11:34:59.2406603'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWalletGenericException'
+              example:
+                status: 'CONFLICT'
+                message: 'Customer already exists'
+                timestamp: '2023-09-17T11:34:59.2406603'
