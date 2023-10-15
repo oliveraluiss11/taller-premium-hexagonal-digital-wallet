@@ -2,7 +2,7 @@ server:
   port: 9001
 spring:
   kafka:
-    bootstrap-server: localhost:9092
+    bootstrap-servers: kafka:9092
   data:
     mongodb:
       uri:  mongodb+srv://oliveraluis11:oliveraluis11@cluster0.iflkfqp.mongodb.net/dw-wallet-service?retryWrites=true&w=majority

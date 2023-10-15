@@ -2,7 +2,7 @@ server:
   port: 9002
 spring:
   kafka:
-    bootstrap-server: localhost:9092
+    bootstrap-server: kafka:9092
   datasource:
     url: jdbc:postgresql://containers-us-west-170.railway.app:7284/railway
     username: postgres

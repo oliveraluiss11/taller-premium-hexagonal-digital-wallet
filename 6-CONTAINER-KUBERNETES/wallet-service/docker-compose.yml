@@ -1,0 +1,35 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+    networks:
+      - mynetwork
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    depends_on:
+      - zookeeper
+    networks:
+      - mynetwork
+  spring-app:
+    image: wallet-service
+    build:
+      context: .
+    ports:
+      - "9001:9001"
+    depends_on:
+      - zookeeper
+      - kafka
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge  
