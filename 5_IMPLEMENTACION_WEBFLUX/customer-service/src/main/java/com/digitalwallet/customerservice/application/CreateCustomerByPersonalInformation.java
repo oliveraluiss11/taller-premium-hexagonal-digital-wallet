@@ -25,10 +25,7 @@ public class CreateCustomerByPersonalInformation {
         if (customerAlreadyExists(documentNumber, customerCreation.getPhoneNumber())) {
             throw new DigitalWalletGenericClientException("Customer already exists", HttpStatus.CONFLICT);
         }
-
-        WalletCreation walletCreation = new WalletCreation("PEN", customer);
         customerRepository.register(customer);
-        walletCreationEventProducer.sendWalletCreationEvent(walletCreation);
     }
 
     private String cleanDocumentNumber(String documentNumber) {

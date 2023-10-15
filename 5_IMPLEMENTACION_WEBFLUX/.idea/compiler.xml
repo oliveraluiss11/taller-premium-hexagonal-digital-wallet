@@ -12,11 +12,15 @@
         <module name="transfer-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="movement-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="customer-service" options="-parameters" />
       <module name="movement-reactive-service" options="-parameters" />
+      <module name="movement-service" options="-parameters" />
       <module name="transfer-service" options="-parameters" />
       <module name="wallet-service" options="-parameters" />
     </option>

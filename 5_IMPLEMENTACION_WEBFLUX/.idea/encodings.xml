@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/customer-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/movement-reactive-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/movement-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/transfer-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wallet-service/src/main/java" charset="UTF-8" />
   </component>

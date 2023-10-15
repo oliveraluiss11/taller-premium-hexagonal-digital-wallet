@@ -18,12 +18,22 @@ import java.util.function.Function;
 public class CustomerRepositoryImpl implements CustomerRepository {
 
     private final CustomerMongoRepository mongoRepository;
+    private final WalletAPIRepository walletAPIRepository;
     private final PersistenceMapper persistenceMapper;
 
     @Override
     public Customer register(Customer customer) {
         CustomerDocument customerDocument = mongoRepository.save(persistenceMapper.toDocument(customer));
+        handleWalletApiResponse(walletAPIRepository.createWallet(new WalletCreation("PEN", customer)));
         return persistenceMapper.toDomain(customerDocument);
+    }
+
+    private void handleWalletApiResponse(ResponseEntity<?> response) {
+        if (response.getStatusCode().is4xxClientError() || response.getStatusCode().is5xxServerError()) {
+            DigitalWalletError errorBody = (DigitalWalletError) response.getBody();
+            HttpStatus httpStatus = HttpStatus.valueOf(response.getStatusCode().value());
+            throw new DigitalWalletGenericClientException(errorBody.getMessage(), httpStatus);
+        }
     }
 
     @Override
@@ -32,7 +42,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         Optional<CustomerDocument> customerDocumentFoundOptional = mongoRepository
                 .findByDocumentNumberOrPhoneNumber(documentNumber, phoneNumber);
-        Optional<Customer> customerOptional = customerDocumentFoundOptional.map(customerDocumentToCustomer);
-        return customerOptional;
+        return customerDocumentFoundOptional.map(customerDocumentToCustomer);
     }
 }

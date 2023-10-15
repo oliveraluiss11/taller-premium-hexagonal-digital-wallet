@@ -1,10 +1,8 @@
 package com.digitalwallet.walletservice.application.create;
 
 import com.digitalwallet.walletservice.domain.Wallet;
-import com.digitalwallet.walletservice.domain.WalletCreationEventListener;
 import com.digitalwallet.walletservice.domain.WalletRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,6 +11,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class CreateWallet {
     private final WalletRepository walletRepository;
+
     public void create(WalletCreationRequest request) {
         /*
          Según la lógica de negocio la billetera debe inicializarse con "0" y de tipo de moneda "PEN"
