@@ -2,11 +2,11 @@ server:
   port: 9002
 spring:
   kafka:
-    bootstrap-server: kafka:9092
+    bootstrap-servers: kafka:9092
   datasource:
-    url: jdbc:postgresql://containers-us-west-170.railway.app:7284/railway
-    username: postgres
-    password: QKjed8CJCAq8lZI7xvLm
+    url: jdbc:postgresql://localhost:5432/transfer
+    username: root
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
