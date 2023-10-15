@@ -1,0 +1,8 @@
+server:
+  port: 9003
+spring:
+  data:
+    mongodb:
+      uri:  mongodb+srv://oliveraluis11:oliveraluis11@cluster0.iflkfqp.mongodb.net/dw-movement-service?retryWrites=true&w=majority
+
+
