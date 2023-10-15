@@ -3,8 +3,6 @@ package com.digitalwallet.customerservice.application;
 import com.digitalwallet.customerservice.domain.Customer;
 import com.digitalwallet.customerservice.domain.CustomerCreation;
 import com.digitalwallet.customerservice.domain.CustomerRepository;
-import com.digitalwallet.customerservice.domain.WalletCreation;
-import com.digitalwallet.customerservice.domain.WalletCreationEventProducer;
 import com.digitalwallet.customerservice.domain.exceptions.DigitalWalletGenericClientException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CreateCustomerByPersonalInformation {
     private final CustomerRepository customerRepository;
-    private final WalletCreationEventProducer walletCreationEventProducer;
 
     @Transactional(rollbackFor = Exception.class)
     public void register(CustomerCreation customerCreation) {
