@@ -22,10 +22,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private final PersistenceMapper persistenceMapper;
 
     @Override
-    public Customer register(Customer customer) {
+    public void register(Customer customer) {
         CustomerDocument customerDocument = mongoRepository.save(persistenceMapper.toDocument(customer));
         handleWalletApiResponse(walletAPIRepository.createWallet(new WalletCreation("PEN", customer)));
-        return persistenceMapper.toDomain(customerDocument);
+        persistenceMapper.toDomain(customerDocument);
     }
 
     private void handleWalletApiResponse(ResponseEntity<?> response) {

@@ -9,6 +9,7 @@ import java.util.List;
 public record DocumentType(String value) {
     public DocumentType(String value){
         this.value = value;
+        CustomerUtils.ensureIsNotNullOrBlank("Document type",value);
         this.ensureIsValidTypeDocument(value);
     }
     private void ensureIsValidTypeDocument(String value){

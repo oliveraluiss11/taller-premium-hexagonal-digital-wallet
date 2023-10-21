@@ -10,4 +10,5 @@ public class CustomerCreation {
     private String givenNames;
     private String surnames;
     private String email;
+    private String pin;
 }

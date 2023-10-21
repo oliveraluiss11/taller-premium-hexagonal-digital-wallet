@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 public record DocumentNumber(String value) {
     public DocumentNumber(String value) {
         this.value = value;
+        CustomerUtils.ensureIsNotNullOrBlank("Document number", value);
         this.ensureDocumentNumber(value);
     }
 

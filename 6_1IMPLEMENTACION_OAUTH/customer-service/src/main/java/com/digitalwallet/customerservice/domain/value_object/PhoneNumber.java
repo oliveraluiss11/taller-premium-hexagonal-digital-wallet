@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 public record PhoneNumber(String value) {
     public PhoneNumber(String value) {
         this.value = value;
+        CustomerUtils.ensureIsNotNullOrBlank("Phone number",value);
         this.ensureIsValidPhoneNumber(value);
     }
     private void ensureIsValidPhoneNumber(String value) {

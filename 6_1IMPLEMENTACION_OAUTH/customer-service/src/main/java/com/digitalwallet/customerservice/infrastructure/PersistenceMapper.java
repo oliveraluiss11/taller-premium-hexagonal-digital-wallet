@@ -10,12 +10,14 @@ public class PersistenceMapper {
         return new CustomerDocument(domain.getCustomerId(), domain.getGivenNames()
                 , domain.getSurnames(), domain.getDocumentNumber()
                 , domain.getDocumentType(), domain.getEmail()
-                , domain.getPhoneNumber());
+                , domain.getPhoneNumber()
+                , domain.getPin());
     }
 
     public Customer toDomain(CustomerDocument document) {
         return new Customer(document.getCustomerId(), document.getDocumentNumber(), document.getPhoneNumber()
                 , document.getDocumentType(), document.getEmail()
-                , document.getGivenNames(), document.getSurnames());
+                , document.getGivenNames(), document.getSurnames()
+                , document.getPin());
     }
 }

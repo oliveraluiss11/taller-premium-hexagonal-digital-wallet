@@ -19,4 +19,5 @@ public class CustomerDocument {
     private String documentType;
     private String email;
     private String phoneNumber;
+    private String pin;
 }

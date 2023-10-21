@@ -16,28 +16,28 @@ public class CreateCustomerByPersonalInformation {
 
     @Transactional(rollbackFor = Exception.class)
     public void register(CustomerCreation customerCreation) {
-        String documentNumber = cleanDocumentNumber(customerCreation.getDocumentNumber());
-        Customer customer = createCustomerFromCreation(customerCreation, documentNumber);
-
-        if (customerAlreadyExists(documentNumber, customerCreation.getPhoneNumber())) {
+        String phoneNumber = cleanPhoneNumber(customerCreation.getPhoneNumber());
+        Customer customer = createCustomerFromCreation(customerCreation);
+        String documentNumber = customer.getDocumentNumber();
+        if (customerAlreadyExists(documentNumber, phoneNumber)) {
             throw new DigitalWalletGenericClientException("Customer already exists", HttpStatus.CONFLICT);
         }
         customerRepository.register(customer);
     }
 
-    private String cleanDocumentNumber(String documentNumber) {
-        // Realiza limpieza u otras manipulaciones según sea necesario
-        return documentNumber.replace("+", "");
+    private String cleanPhoneNumber(String phoneNumber) {
+        return phoneNumber.replace("+", "");
     }
 
-    private Customer createCustomerFromCreation(CustomerCreation customerCreation, String documentNumber) {
+    private Customer createCustomerFromCreation(CustomerCreation customerCreation) {
         return new Customer(
-                documentNumber,
-                customerCreation.getPhoneNumber(),
+                customerCreation.getDocumentNumber(),
+                cleanPhoneNumber(customerCreation.getPhoneNumber()),
                 customerCreation.getDocumentType(),
                 customerCreation.getEmail(),
                 customerCreation.getGivenNames(),
-                customerCreation.getSurnames()
+                customerCreation.getSurnames(),
+                customerCreation.getPin()
         );
     }
 

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 public record Email(String value) {
     public Email(String value) {
         this.value = value;
+        CustomerUtils.ensureIsNotNullOrBlank("Email", value);
         this.ensureIsValidEmail(value);
     }
     private void ensureIsValidEmail(String value) {
