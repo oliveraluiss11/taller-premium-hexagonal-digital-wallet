@@ -1,29 +1,22 @@
 package com.digitalwallet.authenticationservice.domain;
 
-import com.digitalwallet.authenticationservice.domain.value_objects.DocumentNumber;
-import com.digitalwallet.authenticationservice.domain.value_objects.LoginType;
-import com.digitalwallet.authenticationservice.domain.value_objects.PhoneNumber;
+import com.digitalwallet.authenticationservice.domain.value_objects.Credential;
+import com.digitalwallet.authenticationservice.domain.value_objects.Pin;
 
 public class Login {
-    private LoginType loginType;
-    private DocumentNumber documentNumber;
-    private PhoneNumber phoneNumber;
+    private Credential credential;
+    private Pin pin;
 
-    public Login(String loginType, String documentNumber, String phoneNumber) {
-        this.loginType = new LoginType(loginType);
-        this.documentNumber = new DocumentNumber(documentNumber);
-        this.phoneNumber = new PhoneNumber(phoneNumber);
+    public Login(String credential, String pin) {
+        this.credential = new Credential(credential);
+        this.pin = new Pin(pin);
     }
 
-    public String getLoginType() {
-        return loginType.value();
+    public String getCredential() {
+        return credential.value();
     }
 
-    public String getDocumentNumber() {
-        return documentNumber.value();
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber.value();
+    public String getPin() {
+        return this.pin.value();
     }
 }

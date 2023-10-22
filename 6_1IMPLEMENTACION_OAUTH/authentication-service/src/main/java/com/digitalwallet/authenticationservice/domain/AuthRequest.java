@@ -1,10 +1,9 @@
 package com.digitalwallet.authenticationservice.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
-public class AuthResponse {
-    String token;
+public class AuthRequest {
+    private String credential;
+    private String pin;
 }

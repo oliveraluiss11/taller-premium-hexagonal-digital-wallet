@@ -15,12 +15,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private final CustomerMongoRepository customerMongoRepository;
     private final PersistenceMapper mapper;
 
+
     @Override
-    public Optional<Customer> findByDocumentNumberOrPhoneNumber(String documentNumber, String phoneNumber) {
-        return Optional.of(customerMongoRepository
-                .findByDocumentNumberOrPhoneNumber(documentNumber, phoneNumber)
-                .map(mapper::toDomain)
-                .orElseThrow(() -> new DigitalWalletGenericClientException("Customer not found"
-                        , HttpStatus.NOT_FOUND)));
+    public Optional<Customer> findByCredential(String credential) {
+        return customerMongoRepository
+                .findByDocumentNumberOrPhoneNumber(credential, credential)
+                .map(mapper::toDomain);
     }
 }

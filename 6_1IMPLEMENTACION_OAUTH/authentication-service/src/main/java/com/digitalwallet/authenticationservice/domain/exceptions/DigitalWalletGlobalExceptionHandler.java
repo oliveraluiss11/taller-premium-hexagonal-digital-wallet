@@ -1,7 +1,5 @@
 package com.digitalwallet.authenticationservice.domain.exceptions;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,19 +35,6 @@ public class DigitalWalletGlobalExceptionHandler {
             digitalWalletError = new DigitalWalletError(status, message, ex.getCode());
         }
         return new ResponseEntity<>(digitalWalletError, digitalWalletError.getStatus());
-    }
-
-    @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<DigitalWalletError> handleConstraintViolation(
-            ConstraintViolationException ex) {
-        List<String> errors = new ArrayList<String>();
-        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
-            errors.add(violation.getRootBeanClass().getName() + " " +
-                    violation.getPropertyPath() + ": " + violation.getMessage());
-        }
-        DigitalWalletError error = new DigitalWalletError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
-        return new ResponseEntity<DigitalWalletError>(
-                error, error.getStatus());
     }
 
     @ExceptionHandler({Exception.class})

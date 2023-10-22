@@ -1,7 +1,12 @@
 server:
-  port: 9000
+  port: 8999
 spring:
+  kafka:
+    bootstrap-server: localhost:9092
   data:
     mongodb:
       uri:  mongodb+srv://oliveraluis11:oliveraluis11@cluster0.iflkfqp.mongodb.net/dw-customer-service?retryWrites=true&w=majority
+
+token:
+  key: df7c8aa60b35e5975d35e00e3c9063ebe7a05f2c5a3fb8822c408ee2954472ea
 
