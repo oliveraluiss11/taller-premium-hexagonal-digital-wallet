@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Transfer Microservice
+  version: '1.0'
+
+paths:
+  /transfer:
+    post:
+      summary: Realiza una transferencia
+      tags:
+        - transfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+            example:
+              originPhoneNumber: "51912345678"
+              destinationPhoneNumber: "51998765432"
+              amount: 150.75
+              currency: "USD"
+      responses:
+        '201':
+          description: Transferencia exitosa
+
+components:
+  schemas:
+    TransferRequest:
+      type: object
+      properties:
+        originPhoneNumber:
+          type: string
+          pattern: '^519\d{8}$'
+        destinationPhoneNumber:
+          type: string
+          pattern: '^519\d{8}$'
+        amount:
+          type: number
+          minimum: 0
+        currency:
+          type: string
+          enum:
+            - PEN
+            - USD
+      example:
+        originPhoneNumber: "51912345678"
+        destinationPhoneNumber: "51998765432"
+        amount: 150.75
+        currency: "USD"

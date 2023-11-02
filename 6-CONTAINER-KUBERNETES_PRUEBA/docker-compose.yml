@@ -1,0 +1,87 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+    networks:
+      - mynetwork
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    depends_on:
+      - zookeeper
+    networks:
+      - mynetwork
+  customer-service:
+    image: customer-service
+    build:
+      context: ./customer-service
+    ports:
+      - "9000:9000"
+    depends_on:
+      - zookeeper
+      - kafka
+      - wallet-service
+    networks:
+      - mynetwork
+  wallet-service:
+    image: wallet-service
+    build:
+      context: ./wallet-service
+    ports:
+      - "9001:9001"
+    depends_on:
+      - zookeeper
+      - kafka
+    networks:
+      - mynetwork
+  movement-service:
+    image: movement-service
+    build:
+      context: ./movement-service
+    ports:
+      - "9003:9003"
+    depends_on:
+      - zookeeper
+      - kafka
+    networks:
+      - mynetwork
+    
+  transfer-service:
+    image: transfer-service
+    build:
+      context: ./transfer-service
+    ports:
+      - "9002:9002"
+    depends_on:
+      - zookeeper
+      - kafka
+      - wallet-service
+      - movement-service
+      - transfer-postgresdb
+    networks:
+      - mynetwork
+  
+  transfer-postgresdb:
+    image: postgres:12.2
+    container_name: transfer-postgresdb
+    restart: always
+    environment:
+        POSTGRES_DB: transfer
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: root
+        PGDATA: /var/lib/postgresql/data
+    volumes:
+        - ./volumes/postgres-data:/var/lib/postgresql/data
+    ports:
+        - "5432:5432"
+
+networks:
+  mynetwork:
+    driver: bridge

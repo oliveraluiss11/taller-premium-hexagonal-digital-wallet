@@ -1,0 +1,78 @@
+openapi: 3.0.2
+info:
+  title: Movement Microservice
+  version: '1.0'
+servers:
+  - url: http://localhost:9003
+
+components:
+  schemas:
+    MovementCreation:
+      type: object
+      properties:
+        operationNumber:
+          type: string
+          format: uuid
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+        transferId:
+          type: string
+          format: uuid
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d480"
+        typeTransaction:
+          type: string
+          enum: ["TRANSFER"] 
+          example: "TRANSFER"
+        currency:
+          type: string
+          enum: ["USD", "PEN"] 
+          example: "USD"
+        amount:
+          type: number
+          example: 100.00
+        walletId:
+          type: string
+          format: uuid
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+    MovementResponse:
+      allOf:
+        - $ref: '#/components/schemas/MovementCreation'
+        - type: object
+          properties:
+            registeredDate:
+              type: string
+              format: date-time
+              example: "2023-09-24T12:00:00Z"
+
+paths:
+  /movements:
+    post:
+      summary: Create a new movement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovementCreation'
+      responses:
+        '201':
+          description: CREATED
+    get:
+      summary: Get movements by walletId
+      parameters:
+        - name: walletId
+          in: query
+          required: true
+          description: The ID of the wallet to retrieve movements for
+          schema:
+            type: string
+            format: uuid
+            example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array  # Si la respuesta es una lista de movimientos
+                items:
+                  $ref: '#/components/schemas/MovementResponse'
